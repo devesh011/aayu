@@ -1,0 +1,86 @@
+/* Fainter dot-pulse just for this loader, doesn't touch the shared
+   .animate-dot-pulse in globals.css used elsewhere */
+.loader-dot-pulse {
+  animation: loader-dot-pulse 1.2s ease-in-out infinite;
+}
+@keyframes loader-dot-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+/* Continuous spin instead of flip-and-hold */
+.loader-hourglass-rotate {
+  transform-origin: 110px 130px;
+  animation: loader-hourglass-spin 4s linear infinite;
+}
+@keyframes loader-hourglass-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-hourglass-top-sand {
+  animation: loader-sand-top-cycle 4s linear infinite;
+}
+@keyframes loader-sand-top-cycle {
+  0% {
+    clip-path: inset(0% 0 0 0);
+  } /* full */
+  45% {
+    clip-path: inset(94% 0 0 0);
+  } /* drained */
+  50% {
+    clip-path: inset(94% 0 0 0);
+  }
+  95% {
+    clip-path: inset(0% 0 0 0);
+  } /* refilled */
+  100% {
+    clip-path: inset(0% 0 0 0);
+  }
+}
+
+.loader-hourglass-bottom-sand {
+  animation: loader-sand-bottom-cycle 4s linear infinite;
+}
+@keyframes loader-sand-bottom-cycle {
+  0% {
+    clip-path: inset(96% 0 0 0);
+  } /* empty */
+  45% {
+    clip-path: inset(0% 0 0 0);
+  } /* full */
+  50% {
+    clip-path: inset(0% 0 0 0);
+  }
+  95% {
+    clip-path: inset(96% 0 0 0);
+  } /* drained again */
+  100% {
+    clip-path: inset(96% 0 0 0);
+  }
+}
+
+.loader-hourglass-stream {
+  animation: loader-sand-stream-visible 4s linear infinite;
+}
+@keyframes loader-sand-stream-visible {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  47%,
+  53% {
+    opacity: 0;
+  }
+  55%,
+  95% {
+    opacity: 1;
+  }
+  97%,
+  100% {
+    opacity: 0;
+  }
+}

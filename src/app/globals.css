@@ -1,0 +1,520 @@
+@import "tailwindcss";
+
+:root {
+  /* Aayu color tokens */
+  --color-paper: #efeae0; /* warm cream background */
+  --color-ink: #1c1712; /* near-black text on light */
+  --color-rust: #a15c34; /* primary accent - sand, sprout, tags */
+  --color-clay: #6b4a2f; /* wordmark / letter fill */
+  --color-border: #3c2a1a; /* letter border / dark line */
+  --color-muted: #8a8378; /* secondary text, taglines */
+  --color-gold: #a68e5a; /* CTA buttons, highlights */
+  --color-gold-hover: #8f7749; /* CTA hover / scrollbar hover */
+
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-paper: var(--color-paper);
+  --color-ink: var(--color-ink);
+  --color-rust: var(--color-rust);
+  --color-clay: var(--color-clay);
+  --color-border-brand: var(--color-border);
+  --color-muted: var(--color-muted);
+  --color-gold: var(--color-gold);
+  --color-gold-hover: var(--color-gold-hover);
+  --font-display: "Fraunces", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  position: relative;
+}
+
+/* Paper grain texture overlay, sits above the background, below content */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+#__next,
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Cross-fade loop between "Aayu" and "आयु" */
+.ambient-word-en {
+  animation: word-crossfade-en 8s ease-in-out infinite;
+}
+.ambient-word-hi {
+  animation: word-crossfade-hi 8s ease-in-out infinite;
+}
+
+@keyframes word-crossfade-en {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  50%,
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes word-crossfade-hi {
+  0%,
+  40% {
+    opacity: 0;
+  }
+  50%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes sundial-rotate {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.sundial-rotate {
+  animation: sundial-rotate 180s linear infinite;
+}
+
+@keyframes twinkle-pulse {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.28;
+  }
+}
+.twinkle-pulse {
+  animation: twinkle-pulse 5s ease-in-out infinite;
+}
+
+@keyframes twinkle-pulse-slow {
+  0%,
+  100% {
+    opacity: 0.14;
+  }
+  50% {
+    opacity: 0.22;
+  }
+}
+.twinkle-pulse-slow {
+  animation: twinkle-pulse-slow 8s ease-in-out infinite;
+}
+
+@keyframes beam-sweep-a {
+  0%,
+  100% {
+    transform: translateX(-8%);
+  }
+  50% {
+    transform: translateX(8%);
+  }
+}
+.beam-sweep-a {
+  animation: beam-sweep-a 24s ease-in-out infinite;
+}
+
+@keyframes beam-sweep-b {
+  0%,
+  100% {
+    transform: translateX(6%);
+  }
+  50% {
+    transform: translateX(-10%);
+  }
+}
+.beam-sweep-b {
+  animation: beam-sweep-b 30s ease-in-out infinite;
+}
+
+@keyframes word-breathe {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+.word-breathe {
+  animation: word-breathe 6s ease-in-out infinite;
+}
+
+@keyframes morph-a {
+  0%,
+  100% {
+    border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%;
+    transform: translate(0, 0);
+  }
+  33% {
+    border-radius: 60% 40% 45% 55% / 55% 60% 40% 45%;
+    transform: translate(2vw, 3vh);
+  }
+  66% {
+    border-radius: 50% 50% 35% 65% / 40% 55% 45% 60%;
+    transform: translate(-1vw, 2vh);
+  }
+}
+.morph-a {
+  animation: morph-a 24s ease-in-out infinite;
+}
+
+@keyframes morph-b {
+  0%,
+  100% {
+    border-radius: 55% 45% 40% 60% / 50% 55% 45% 50%;
+    transform: translate(0, 0);
+  }
+  50% {
+    border-radius: 40% 60% 55% 45% / 60% 45% 55% 40%;
+    transform: translate(-2vw, -3vh);
+  }
+}
+.morph-b {
+  animation: morph-b 28s ease-in-out infinite;
+}
+
+@keyframes morph-c {
+  0%,
+  100% {
+    border-radius: 48% 52% 55% 45% / 42% 48% 52% 58%;
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    border-radius: 58% 42% 45% 55% / 55% 50% 50% 45%;
+    transform: translate(-1.5vw, 2vh) scale(1.06);
+  }
+}
+.morph-c {
+  animation: morph-c 20s ease-in-out infinite;
+}
+
+@keyframes contour-flow-1 {
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(1.5%) translateY(-0.8%);
+  }
+}
+.contour-flow-1 {
+  animation: contour-flow-1 18s ease-in-out infinite;
+}
+
+@keyframes contour-flow-2 {
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(-1.8%) translateY(0.6%);
+  }
+}
+.contour-flow-2 {
+  animation: contour-flow-2 22s ease-in-out infinite;
+}
+
+@keyframes contour-flow-3 {
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(1.2%) translateY(0.9%);
+  }
+}
+.contour-flow-3 {
+  animation: contour-flow-3 26s ease-in-out infinite;
+}
+
+@keyframes word-breathe {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+.word-breathe {
+  animation: word-breathe 6s ease-in-out infinite;
+}
+
+@keyframes highlight-sweep {
+  0%,
+  15% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  45%,
+  70% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+}
+.highlight-sweep {
+  animation: highlight-sweep 8s ease-in-out infinite;
+}
+
+/* Very slow rotation on the ring + word group, like the hourglass */
+.ring-rotate-slow {
+  transform-origin: center center;
+  animation: ring-rotate-slow 120s linear infinite;
+}
+@keyframes ring-rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Slowed down: 8s → 50s total loop */
+.hourglass-rotate {
+  transform-origin: 110px 130px;
+  animation: hourglass-flip 50s ease-in-out infinite;
+}
+@keyframes hourglass-flip {
+  0%,
+  44% {
+    transform: rotate(0deg);
+  }
+  50%,
+  94% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* TOP pile: full → drains (0-44%) → holds through flip (44-50%)
+   → now visually the BOTTOM chamber, so it fills back up (50-94%) → holds (94-100%) */
+.hourglass-top-sand {
+  animation: sand-top-cycle 50s linear infinite;
+}
+@keyframes sand-top-cycle {
+  0% {
+    clip-path: inset(0% 0 0 0);
+  } /* full */
+  44% {
+    clip-path: inset(94% 0 0 0);
+  } /* drained */
+  50% {
+    clip-path: inset(94% 0 0 0);
+  } /* holds through flip */
+  94% {
+    clip-path: inset(0% 0 0 0);
+  } /* filled (now acting as bottom) */
+  100% {
+    clip-path: inset(0% 0 0 0);
+  }
+}
+
+/* BOTTOM pile: empty → fills (0-44%) → holds through flip (44-50%)
+   → now visually the TOP chamber, so it drains (50-94%) → holds (94-100%) */
+.hourglass-bottom-sand {
+  animation: sand-bottom-cycle 50s linear infinite;
+}
+@keyframes sand-bottom-cycle {
+  0% {
+    clip-path: inset(96% 0 0 0);
+  } /* empty */
+  44% {
+    clip-path: inset(0% 0 0 0);
+  } /* full */
+  50% {
+    clip-path: inset(0% 0 0 0);
+  } /* holds through flip */
+  94% {
+    clip-path: inset(96% 0 0 0);
+  } /* drained (now acting as top) */
+  100% {
+    clip-path: inset(96% 0 0 0);
+  }
+}
+
+.hourglass-stream {
+  animation: sand-stream-visible 50s linear infinite;
+}
+@keyframes sand-stream-visible {
+  0%,
+  44% {
+    opacity: 1;
+  }
+  46%,
+  50% {
+    opacity: 0;
+  }
+  52%,
+  94% {
+    opacity: 1;
+  }
+  96%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.hourglass-grain {
+  animation: grain-fall 0.6s linear infinite;
+}
+
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+.animate-dot-pulse {
+  animation: dot-pulse 3.5s ease-in-out infinite;
+}
+
+@keyframes grain-fall {
+  0% {
+    transform: translateY(-3px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  90% {
+    transform: translateY(4px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(5px);
+    opacity: 0;
+  }
+}
+
+/* Rings pulse outward slightly and fade, staggered per ring */
+@keyframes ring-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+.flower-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ring-pulse 6s ease-in-out infinite;
+}
+
+/* Wilted petals: slow, heavy droop-and-settle sway + shallow breath */
+@keyframes petal-wilt-sway {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.04);
+  }
+}
+.petal-wilt {
+  animation: petal-wilt-sway 7s ease-in-out infinite;
+}
+
+/* Blooming petals: fuller "opening" breath */
+@keyframes petal-bloom-sway {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(-2deg) scale(1.15);
+  }
+}
+.petal-bloom {
+  animation: petal-bloom-sway 4.5s ease-in-out infinite;
+}
+
+/* Leaves sway independently */
+@keyframes leaf-sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+.leaf-sway {
+  animation: leaf-sway 5.5s ease-in-out infinite;
+}
+
+/* Dust drifts outward from the flower head and fades, then resets */
+@keyframes dust-drift {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
+}
+.dust-particle {
+  animation: dust-drift 5s ease-out infinite;
+}
+
+/* Branded scrollbar for scrollable app UI (modals, panels), not iframes —
+   iframe content is a separate document and needs its own <style> tag,
+   see SCROLLBAR_STYLE in emailTemplates.ts for that. */
+.aayu-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #a68e5a transparent;
+}
+.aayu-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.aayu-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.aayu-scroll::-webkit-scrollbar-thumb {
+  background: #a68e5a;
+  border-radius: 9999px;
+}
+.aayu-scroll::-webkit-scrollbar-thumb:hover {
+  background: #8f7749;
+}
