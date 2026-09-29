@@ -4,8 +4,13 @@
   animation: loader-dot-pulse 1.2s ease-in-out infinite;
 }
 @keyframes loader-dot-pulse {
-  0%, 100% { opacity: 0.4; }
-  50%      { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 /* Continuous spin instead of flip-and-hold */
 .loader-hourglass-rotate {

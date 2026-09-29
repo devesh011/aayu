@@ -53,7 +53,7 @@ function ReminderRow({ placeholder }: { placeholder: string }) {
           </p>
         </div>
       </div>
-      <span className="shrink-0 whitespace-nowrap rounded-full border border border-(--color-border)/15 px-2.5 py-1 font-sans text-[11px] text-muted sm:px-3 sm:text-xs">
+      <span className="shrink-0 whitespace-nowrap rounded-full border border-(--color-border)/15 px-2.5 py-1 font-sans text-[11px] text-muted sm:px-3 sm:text-xs">
         Wish now
       </span>
     </div>
@@ -70,7 +70,7 @@ export function HeroMockup() {
       <DotCluster className="absolute -bottom-6 -left-6 w-12 opacity-70 sm:-bottom-10 sm:-left-10 sm:w-20" />
 
       <div
-        className="relative rounded-2xl border border border-(--color-border)/15 bg-paper p-1.5 shadow-[0_35px_60px_-25px_rgba(28,23,18,0.35)] transition-transform duration-500 hover:transform-[rotateX(0deg)_rotateY(0deg)] sm:p-2"
+        className="relative rounded-2xl border border-(--color-border)/15 bg-paper p-1.5 shadow-[0_35px_60px_-25px_rgba(28,23,18,0.35)] transition-transform duration-500 hover:transform-[rotateX(0deg)_rotateY(0deg)] sm:p-2"
         style={{
           transform: "rotateX(8deg) rotateY(-14deg) rotateZ(1deg)",
           transformStyle: "preserve-3d",
