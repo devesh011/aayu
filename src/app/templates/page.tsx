@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
+import { beastOfRage } from "@/lib/fonts";
 import {
   renderTemplate,
   type Template,
@@ -33,10 +34,27 @@ const SAMPLE_CONTACT: Contact = {
   createdAt: "",
 };
 
+function getSignInErrorMessage(message: string): React.ReactNode {
+  const isInviteOnly =
+    /signup|sign.?up/i.test(message) && /not allowed|disabled/i.test(message);
+  if (isInviteOnly) {
+    return (
+      <>
+        This one&apos;s invite-only — links only go out to people close to{" "}
+        <span className={`${beastOfRage.className} text-base tracking-wide`}>
+          D3v8ll
+        </span>
+        . Reach out to him if you&apos;d like in.
+      </>
+    );
+  }
+  return message;
+}
+
 function SignIn() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<React.ReactNode | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -45,7 +63,7 @@ function SignIn() {
       email,
       options: { emailRedirectTo: `${window.location.origin}/templates` },
     });
-    if (error) setError(error.message);
+    if (error) setError(getSignInErrorMessage(error.message));
     else setSent(true);
   }
 
@@ -58,21 +76,23 @@ function SignIn() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
-      <input
-        type="email"
-        required
-        placeholder="you@example.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="rounded-full border border-(--color-border)/25 bg-paper px-4 py-2.5 font-sans text-sm text-ink outline-none focus:border-rust"
-      />
-      <button
-        type="submit"
-        className="rounded-full bg-gold px-6 py-2.5 font-sans text-sm text-paper transition-opacity hover:opacity-90"
-      >
-        Send sign-in link
-      </button>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <input
+          type="email"
+          required
+          placeholder="you@example.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="rounded-full border border-(--color-border)/25 bg-paper px-4 py-2.5 font-sans text-sm text-ink outline-none focus:border-rust"
+        />
+        <button
+          type="submit"
+          className="rounded-full bg-gold px-6 py-2.5 font-sans text-sm text-paper transition-opacity hover:opacity-90"
+        >
+          Send sign-in link
+        </button>
+      </div>
       {error && <p className="font-sans text-xs text-red-700">{error}</p>}
     </form>
   );
